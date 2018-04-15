@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+<div class="about-top" id="about">
+  <div class="container">
+    
+    <div class="wthree-services-bottom-grids">
+      <div class="col-md-6 wthree-services-left">
+        <img src="http://placehold.it/900x300" alt="">
+      </div>
+      <div class="col-md-6 wthree-services-right first-w3l">
+        <div class="wthree-services-right-top">
+          <h4>Property Description</h4>
+          <p> <%= @property.name %></p>
+          <p><%= @property.price %></p>
+          <p><%= @property.location %></p>
+          <p><%= @property.description %></p>
+          
+        </div>
+        <div class="wthree-services-right-bottom">
+          <div class="services-right-bottom-bottom">
+            <div class="col-xs-1 services-bottom-icon">
+              <i class="fa fa-home" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-11 services-bottom-info">
+              <h5></h5>
+              <p></p>
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+          <div class="services-right-bottom-bottom">
+            <div class="col-xs-1 services-bottom-icon">
+              <i class="fa fa-key" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-11 services-bottom-info">
+              <h5></h5>
+              <p></p>
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+      <div class="clearfix"> </div>
+    </div>
+  </div>
+</div>
+<% @contact = Contact.new %>
+<%= form_for(@contact) do |form| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this registration from being saved:</h2>
+      <ul>
+      <% @contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h3>Fill the form to contact the owner</h3>
+   <%= form.hidden_field :property_id, value: @property.id %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobile %>
+    <%= form.text_field :mobile, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_area :message,class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Enter", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+   
+
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>
